@@ -6,13 +6,15 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   server: {
     https: {
-      key: "./cert/localhost+2-key.pem",
-      cert: "./cert/localhost+2.pem",
+      key: "./cert/localhost-key.pem",
+      cert: "./cert/localhost.pem",
     },
+    host: true,
+    port: 5173,
+    open: true,
   },
   plugins: [
     preact(),
-
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",

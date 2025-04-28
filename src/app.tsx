@@ -50,6 +50,13 @@ export function App() {
     fetchMarketData();
   }, []);
 
+  useEffect(() => {
+    console.log("App mounted");
+    window.addEventListener("beforeinstallprompt", (e) => {
+      console.log("beforeinstallprompt fired", e);
+    });
+  }, []);
+
   return (
     <>
       <Tabs
