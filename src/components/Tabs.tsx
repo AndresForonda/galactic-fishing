@@ -22,7 +22,7 @@ export const Tabs: FunctionalComponent<TabsProps> = ({
         <button
           key={tab.key}
           onClick={() => onSelectedTab(tab.key)}
-          className={`px-4 py-2 text-2xl ${
+          class={`text-2xl w-36 h-12  ${
             selectedTab === tab.key
               ? 'bg-primary text-black cursor-crosshair'
               : 'bg-border text-white opacity-50 hover:opacity-100 cursor-pointer'
