@@ -22,7 +22,7 @@ export const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
                 </div>
                 <div class="">{player.username}</div>
               </div>
-              <div class="flex justify-between items-center w-full text-md">
+              <div class="flex justify-center items-center w-full text-md gap-10">
                 <div>🆙 {player.level}</div>
                 <div>🧠 {player.xp.toLocaleString()}</div>
                 <div>💰 {player.gold.toLocaleString()}</div>

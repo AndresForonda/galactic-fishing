@@ -2,19 +2,12 @@
 
 @theme {
   --color-primary: #b4fa72;
-  /* Verde neón */
   --color-secondary: #9aff9a;
-  /* Verde claro */
   --color-background: #000000;
-  /* Negro puro */
   --color-accent: #ffff00;
-  /* Amarillo alerta */
   --color-danger: #ff5555;
-  /* Rojo peligro */
   --color-info: #7df9ff;
-  /* Azul ayuda */
   --color-border: #2f4f4f;
-  /* Gris oscuro */
 }
 
 @layer base {
@@ -37,29 +30,22 @@
 
   * {
     scrollbar-width: thin;
-    /* Para Firefox */
-    scrollbar-color: #2f4f4f #d1d5db;
-    /* thumb (oscuro), track (gris) */
+    scrollbar-color: #2f4f4f transparent;
   }
 
-  /* Para navegadores basados en WebKit (Chrome, Edge, Safari) */
   *::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
   *::-webkit-scrollbar-track {
-    background: #d1d5db;
-    /* gris clarito (track) */
+    background: transparent;
   }
 
   *::-webkit-scrollbar-thumb {
     background-color: #2f4f4f;
-    /* color thumb */
-    border-radius: 9999px;
-    /* super redondo */
-    border: 2px solid #d1d5db;
-    /* borde color track */
+    border-radius: 50px;
+    border: 2px solid transparent;
   }
 }
 

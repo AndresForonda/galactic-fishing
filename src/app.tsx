@@ -94,7 +94,7 @@ export function App() {
             {selectedTab === 'leaderboard' && (
               <TopLeaderBoard players={topPlayers} />
             )}
-            <div class="flex-grow overflow-y-scroll w-full">
+            <div class="flex-grow overflow-hidden w-full !p-0">
               {selectedTab === 'leaderboard' && (
                 <Leaderboard players={otherPlayers || []} />
               )}
