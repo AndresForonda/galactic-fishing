@@ -1,1 +1,83 @@
-@import "tailwindcss"
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;700&display=swap');
+@import 'tailwindcss';
+@plugin 'tailwind-scrollbar';
+
+@theme {
+  --color-primary: #b4fa72;
+  /* Verde neón */
+  --color-secondary: #9aff9a;
+  /* Verde claro */
+  --color-background: #000000;
+  /* Negro puro */
+  --color-accent: #ffff00;
+  /* Amarillo alerta */
+  --color-danger: #ff5555;
+  /* Rojo peligro */
+  --color-info: #7df9ff;
+  /* Azul ayuda */
+  --color-border: #2f4f4f;
+  /* Gris oscuro */
+}
+
+@layer base {
+  html {
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: var(--color-background-500);
+    color: var(--color-primary-500);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button,
+  .tab-title {
+    font-family: 'VT323', monospace;
+  }
+
+  * {
+    scrollbar-width: thin;
+    /* Para Firefox */
+    scrollbar-color: #2f4f4f #d1d5db;
+    /* thumb (oscuro), track (gris) */
+  }
+
+  /* Para navegadores basados en WebKit (Chrome, Edge, Safari) */
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #d1d5db;
+    /* gris clarito (track) */
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #2f4f4f;
+    /* color thumb */
+    border-radius: 9999px;
+    /* super redondo */
+    border: 2px solid #d1d5db;
+    /* borde color track */
+  }
+}
+
+.custom-dashed {
+  border-bottom: 2px solid transparent;
+  border-image: repeating-linear-gradient(
+      to right,
+      #2f4f4f 0,
+      #2f4f4f 10px,
+      transparent 10px,
+      transparent 20px
+    )
+    1;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
