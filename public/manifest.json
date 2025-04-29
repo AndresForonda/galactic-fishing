@@ -4,7 +4,7 @@
   "description": "Reel in legendary fish and dominate the galaxy!",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "theme_color": "#3b82f6",
   "orientation": "portrait-primary",
   "icons": [
