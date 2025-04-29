@@ -81,8 +81,7 @@ export function App() {
         <div class="h-14 p-2 sticky flex items-center justify-center bg-black top-0">
           <img
             src="/logo-400.avif"
-            width="400"
-            height="50"
+            class="w-[400px] h-[50px] object-contain block"
             alt="Logo"
             fetchpriority="high"
           />
