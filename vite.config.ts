@@ -18,11 +18,11 @@ export default defineConfig({
     preact(),
     tailwindcss(),
     VitePWA({
-      strategies: 'injectManifest', // ⬅️ USAMOS injectManifest
-      srcDir: 'src', // ⬅️ directorio donde pondremos el nuevo sw.ts
-      filename: 'sw.ts', // ⬅️ el nombre del Service Worker
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
       injectManifest: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'], // Qué pre-cachear
+        globPatterns: ['assets/**/*.{js,css}', 'icons/**/*.png', 'logo.avif'],
       },
       manifest: {
         name: 'Galactic Fishing',
@@ -30,22 +30,26 @@ export default defineConfig({
         description: 'Reel in legendary fish and dominate the galaxy!',
         start_url: '/',
         display: 'standalone',
-        background_color: '#ffffff',
-        theme_color: '#3b82f6',
+        display_override: ['standalone', 'browser'],
+        background_color: '#000000',
+        theme_color: '#000000',
+        orientation: 'portrait-primary',
         icons: [
           {
             src: '/icons/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any maskable',
           },
           {
             src: '/icons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any maskable',
           },
         ],
       },
-    }),
+    }) as PluginOption,
     visualizer({
       open: true,
       gzipSize: true,
