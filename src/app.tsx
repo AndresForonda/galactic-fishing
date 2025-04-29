@@ -77,7 +77,7 @@ export function App() {
 
   return (
     <>
-      <div class="flex flex-col items-center h-screen min-h-screen bg-black text-white p-2 overflow-hidden">
+      <div class="flex flex-col items-center h-lvh min-h-lvh bg-black text-white p-2 overflow-hidden">
         <div class="h-14 sticky flex items-center justify-center px-1 bg-black top-0">
           <img
             src="/logo-400.avif"
