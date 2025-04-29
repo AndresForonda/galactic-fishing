@@ -84,7 +84,6 @@ export function App() {
             width="400"
             height="50"
             alt="Logo"
-            loading="lazy"
             fetchpriority="high"
           />
         </div>
@@ -100,7 +99,7 @@ export function App() {
             {selectedTab === 'leaderboard' && (
               <TopLeaderBoard players={topPlayers} />
             )}
-            <div class="flex-grow overflow-hidden w-full !p-0">
+            <div class="flex-grow overflow-hidden w-full ">
               {selectedTab === 'leaderboard' && (
                 <Suspense fallback={<Loading />}>
                   {otherPlayers && <Leaderboard players={otherPlayers || []} />}
