@@ -15,14 +15,14 @@ export const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
       {players &&
         players.map((player: LeaderboardPlayer) => (
           <div key={player.username} class="bg-border w-full p-2">
-            <div class="flex flex-col items-center justify-between w-full gap-2">
-              <div class="flex items-center text-2xl font-bold">
-                <div class="text-2xl pr-2">
+            <div class="flex flex-col items-center justify-between w-full gap-1">
+              <div class="flex items-center text-lg font-bold">
+                <div class=" pr-2">
                   {RANK_ICONS[player.rank as keyof typeof RANK_ICONS]}
                 </div>
-                <div class="">{player.username}</div>
+                <div>{player.username}</div>
               </div>
-              <div class="flex justify-center items-center w-full text-md gap-10">
+              <div class="flex justify-center items-center w-full text-sm gap-6">
                 <div>🆙 {player.level}</div>
                 <div>🧠 {player.xp.toLocaleString()}</div>
                 <div>💰 {player.gold.toLocaleString()}</div>

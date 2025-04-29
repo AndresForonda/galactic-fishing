@@ -22,7 +22,7 @@ export default defineConfig({
       srcDir: 'src',
       filename: 'sw.ts',
       injectManifest: {
-        globPatterns: ['assets/**/*.{js,css}', 'icons/**/*.png', 'logo.avif'],
+        globPatterns: ['assets/**/*.{js,css}', '**/*.{html,ico,png,svg,avif}'],
       },
       manifest: {
         name: 'Galactic Fishing',

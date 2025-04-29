@@ -77,8 +77,8 @@ export function App() {
 
   return (
     <>
-      <div class="flex flex-col items-center h-screen min-h-screen bg-black text-white p-2 overflow-hidden pb-6">
-        <div class="h-14 flex items-center justify-center px-1 bg-black">
+      <div class="flex flex-col items-center h-screen min-h-screen bg-black text-white p-2 overflow-hidden">
+        <div class="h-14 sticky flex items-center justify-center px-1 bg-black top-0">
           <img
             src="/logo-400.avif"
             width="400"
