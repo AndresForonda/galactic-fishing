@@ -3,9 +3,7 @@ import { useState, useRef, useEffect } from 'preact/hooks'
 import { LeaderboardResponse } from '../api'
 import { useIsMobile } from '../hooks.ts'
 
-export const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({
-  players,
-}) => {
+const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
   const isMobile = useIsMobile()
   const containerRef = useRef<HTMLDivElement>(null)
   const rowHeight = 40
@@ -114,3 +112,5 @@ export const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({
     </div>
   )
 }
+
+export default Leaderboard

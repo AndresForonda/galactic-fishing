@@ -7,12 +7,13 @@ import {
   MarketResponse,
 } from './api'
 
-import { Leaderboard } from './components/Leaderboard'
 import { TopLeaderBoard } from './components/TopLeaderBoard'
-import { Market } from './components/Market'
 import { Loading } from './components/Loading'
 
 import { Tabs } from './components/Tabs'
+import { lazy, Suspense } from 'preact/compat'
+const Market = lazy(() => import('./components/Market'))
+const Leaderboard = lazy(() => import('./components/Leaderboard'))
 
 export function App() {
   const tabs = [
@@ -43,7 +44,6 @@ export function App() {
       console.error('Error fetching leaderboard data:', error)
     } else {
       setLeaderboardData(data)
-      console.log('Leaderboard data:', data)
     }
   }
 
@@ -53,7 +53,6 @@ export function App() {
       console.error('Error fetching market data:', error)
     } else {
       setMarketData(data)
-      console.log('Market data:', data)
     }
   }
 
@@ -80,7 +79,7 @@ export function App() {
     <>
       <div class="flex flex-col items-center h-screen min-h-screen bg-black text-white p-2 overflow-hidden pb-6">
         <div class="h-14 flex items-center justify-center px-1 bg-black">
-          <img src="/logo.png" alt="Logo" />
+          <img src="/logo.avif" alt="Logo" fetchpriority="high" />
         </div>
         <Tabs
           tabs={tabs}
@@ -96,10 +95,14 @@ export function App() {
             )}
             <div class="flex-grow overflow-hidden w-full !p-0">
               {selectedTab === 'leaderboard' && (
-                <Leaderboard players={otherPlayers || []} />
+                <Suspense fallback={<Loading />}>
+                  {otherPlayers && <Leaderboard players={otherPlayers || []} />}
+                </Suspense>
               )}
-              {selectedTab === 'market' && marketData && (
-                <Market items={marketData.items} />
+              {selectedTab === 'market' && (
+                <Suspense fallback={<Loading />}>
+                  {marketData && <Market items={marketData.items} />}
+                </Suspense>
               )}
             </div>
           </>

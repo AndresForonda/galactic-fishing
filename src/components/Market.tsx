@@ -5,7 +5,7 @@ interface MarketProps {
   items: MarketItem[]
 }
 
-export const Market: FunctionComponent<MarketProps> = ({ items }) => {
+const Market: FunctionComponent<MarketProps> = ({ items }) => {
   const MARKET_ICONS = {
     poison_delay: ['☠️', '⏳'],
     poison_leveling: ['☠️', '🆙'],
@@ -40,3 +40,5 @@ export const Market: FunctionComponent<MarketProps> = ({ items }) => {
     </div>
   )
 }
+
+export default Market
