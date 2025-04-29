@@ -20,7 +20,7 @@ export const Loading: FunctionalComponent = () => {
   }, [])
 
   return (
-    <div class="flex flex-col items-left w-full">
+    <div class="flex flex-col items-left flex-grow overflow-hidden w-full">
       <p>
         {loadingText}
         {loadingText.length % 2 ? '_' : ''}

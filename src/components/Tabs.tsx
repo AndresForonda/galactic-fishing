@@ -17,7 +17,7 @@ export const Tabs: FunctionalComponent<TabsProps> = ({
   onSelectedTab,
 }) => {
   return (
-    <div class="my-4">
+    <div>
       {tabs.map((tab) => (
         <button
           key={tab.key}
