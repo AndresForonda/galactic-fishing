@@ -14,7 +14,7 @@ const Market: FunctionComponent<MarketProps> = ({ items }) => {
   }
 
   return (
-    <div class="flex flex-col w-full gap-4">
+    <div class="flex flex-col w-full gap-4 h-full overflow-y-auto">
       {items &&
         items.map((item: MarketItem) => (
           <div
