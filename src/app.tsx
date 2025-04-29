@@ -79,7 +79,14 @@ export function App() {
     <>
       <div class="flex flex-col items-center h-screen min-h-screen bg-black text-white p-2 overflow-hidden pb-6">
         <div class="h-14 flex items-center justify-center px-1 bg-black">
-          <img src="/logo.avif" alt="Logo" fetchpriority="high" />
+          <img
+            src="/logo-400.avif"
+            width="400"
+            height="50"
+            alt="Logo"
+            loading="lazy"
+            fetchpriority="high"
+          />
         </div>
         <Tabs
           tabs={tabs}
