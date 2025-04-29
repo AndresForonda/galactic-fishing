@@ -26,7 +26,6 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
     setPlayersOnPage(players.slice(startIndex, endIndex))
   }
 
-  // initial players calling handlePageChange with page 1 and rowsPerPage
   useEffect(() => {
     const startIndex = (currentPage - 1) * rowsPerPage
     const endIndex = startIndex + rowsPerPage
@@ -36,17 +35,21 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
 
   return (
     <div
-      class="overflow-y-auto flex flex-col flex-grow"
+      class="overflow-y-auto flex flex-col flex-grow max-w-3xl mx-auto "
       style={{ height: '100%' }}
     >
       <table class="w-full border-2 border-t-0 border-border h-full">
         <thead class="bg-black sticky top-0 z-10">
-          <tr class="text-md">
-            <th class="border-t-2 border-border py-2 w-16">Rank</th>
-            <th class="border-t-2 border-border py-2">Username</th>
-            <th class="border-t-2 border-border py-2 w-16">Level</th>
-            <th class="border-t-2 border-border py-2 hidden">XP</th>
-            <th class="border-t-2 border-border py-2 hidden">Gold</th>
+          <tr class="text-md sm:text-lg">
+            <th class="border-t-2 border-border  py-2 w-16">Rank</th>
+            <th class="border-t-2 border-border  py-2">Username</th>
+            <th class="border-t-2 border-border  py-2 w-16">Level</th>
+            <th class="border-t-2 border-border  py-2 hidden sm:table-cell">
+              XP | 🧠
+            </th>
+            <th class="border-t-2 border-border  py-2 hidden sm:table-cell">
+              Gold | 💰
+            </th>
           </tr>
         </thead>
         <tbody class="text-xl">
@@ -62,23 +65,27 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
                 <td class="custom-dashed text-right pr-2">{player.rank}</td>
                 <td
                   class={`custom-dashed overflow-hidden truncate whitespace-nowrap pl-4 ${
-                    expandedRow === player.username ? 'font-bold py-2' : ''
+                    isMobile && expandedRow === player.username
+                      ? 'font-bold py-2'
+                      : ''
                   }`}
                   title={player.username}
                 >
                   {player.username}
-                  {expandedRow === player.username && (
+                  {isMobile && expandedRow === player.username && (
                     <div class="text-base text-info-500 mt-1">
                       🧠 {player.xp.toLocaleString()} | 💰{' '}
                       {player.gold.toLocaleString()}
                     </div>
                   )}
                 </td>
-                <td class=" custom-dashed text-right px-2">{player.level}</td>
-                <td class="custom-dashed text-right hidden">
+                <td class=" custom-dashed text-right px-2 font-bold">
+                  {player.level}
+                </td>
+                <td class="custom-dashed text-right hidden sm:table-cell pr-2">
                   {player.xp.toLocaleString()}
                 </td>
-                <td class="custom-dashed text-right hidden">
+                <td class="custom-dashed text-right hidden sm:table-cell pr-2">
                   {player.gold.toLocaleString()}
                 </td>
               </tr>

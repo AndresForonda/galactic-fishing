@@ -91,7 +91,7 @@ export function App() {
 
   return (
     <>
-      <div class="flex flex-col items-center justify-start h-lvh gap-2 bg-black text-white p-2 overflow-hidden">
+      <div class="flex flex-col items-center justify-start h-lvh gap-4 bg-black text-white p-2 overflow-hidden">
         <div class="h-14 p-2 sticky flex items-center justify-center bg-black top-0">
           <img
             src="/logo-400.avif"

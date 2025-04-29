@@ -17,7 +17,7 @@ export const Tabs: FunctionalComponent<TabsProps> = ({
   onSelectedTab,
 }) => {
   return (
-    <div>
+    <div class="flex justify-center items-center">
       {tabs.map((tab) => (
         <button
           key={tab.key}
