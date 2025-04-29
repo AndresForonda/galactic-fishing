@@ -54,29 +54,27 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
             return (
               <tr
                 key={player.username}
-                class={` odd:bg-gray-900 even:bg-black  ${
+                class={` odd:bg-gray-900 even:bg-black h-12  ${
                   isMobile ? 'cursor-crosshair hover:bg-gray-700' : ''
                 }`}
                 onClick={() => isMobile && toggleRow(player.username)}
               >
-                <td class="h-8 custom-dashed text-right pr-2">{player.rank}</td>
+                <td class="custom-dashed text-right pr-2">{player.rank}</td>
                 <td
-                  class={`h-8 custom-dashed overflow-hidden truncate whitespace-nowrap ${
+                  class={`custom-dashed overflow-hidden truncate whitespace-nowrap pl-4 ${
                     expandedRow === player.username ? 'font-bold py-2' : ''
                   }`}
                   title={player.username}
                 >
                   {player.username}
                   {expandedRow === player.username && (
-                    <div class="text-base text-info-500">
-                      🧠 {player.xp.toLocaleString()} · 💰{' '}
+                    <div class="text-base text-info-500 mt-1">
+                      🧠 {player.xp.toLocaleString()} | 💰{' '}
                       {player.gold.toLocaleString()}
                     </div>
                   )}
                 </td>
-                <td class="h-8 custom-dashed text-right px-2">
-                  {player.level}
-                </td>
+                <td class=" custom-dashed text-right px-2">{player.level}</td>
                 <td class="custom-dashed text-right hidden">
                   {player.xp.toLocaleString()}
                 </td>

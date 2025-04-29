@@ -64,12 +64,30 @@ export function App() {
     fetchData()
   }, [])
 
-  useEffect(() => {
-    console.log('App mounted')
-    window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('beforeinstallprompt fired', e)
-    })
-  }, [])
+  const renderContent = () => {
+    if (selectedTab === 'leaderboard') {
+      if (!leaderboardData) return <Loading />
+      return (
+        <>
+          <TopLeaderBoard players={topPlayers} />
+          <div class="flex-grow overflow-hidden w-full">
+            <Leaderboard players={otherPlayers} />
+          </div>
+        </>
+      )
+    }
+
+    if (selectedTab === 'market') {
+      if (!marketData) return <Loading />
+      return (
+        <div class="flex-grow overflow-hidden w-full">
+          <Market items={marketData.items} />
+        </div>
+      )
+    }
+
+    return null
+  }
 
   return (
     <>
@@ -87,28 +105,7 @@ export function App() {
           selectedTab={selectedTab}
           onSelectedTab={setSelectedTab}
         />
-        <Suspense fallback={<Loading />}>
-          {selectedTab === 'leaderboard' ? (
-            leaderboardData ? (
-              <>
-                <TopLeaderBoard players={topPlayers} />
-                <div class="flex-grow overflow-hidden w-full">
-                  <Leaderboard players={otherPlayers} />
-                </div>
-              </>
-            ) : (
-              <Loading />
-            )
-          ) : selectedTab === 'market' ? (
-            marketData ? (
-              <div class="flex-grow overflow-hidden w-full">
-                <Market items={marketData.items} />
-              </div>
-            ) : (
-              <Loading />
-            )
-          ) : null}
-        </Suspense>
+        <Suspense fallback={<Loading />}>{renderContent()}</Suspense>
       </div>
     </>
   )
