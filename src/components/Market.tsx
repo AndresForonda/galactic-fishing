@@ -19,7 +19,7 @@ const Market: FunctionComponent<MarketProps> = ({ items }) => {
         items.map((item: MarketItem) => (
           <div
             key={item.id}
-            class="flex  items-center  border-border border-2 w-full px-2 py-4 gap-4 "
+            class="flex  border-border border-2 px-2 py-4 gap-4 "
           >
             <div class="text-6xl flex justify-center items-center gap-1 w-2/5 text-center">
               {MARKET_ICONS[item.type as keyof typeof MARKET_ICONS].map(
@@ -28,7 +28,7 @@ const Market: FunctionComponent<MarketProps> = ({ items }) => {
                 )
               )}
             </div>
-            <div class="flex flex-col max-w-3/5 self-end">
+            <div class="flex flex-col w-3/5">
               <p class="text-primary font-bold text-xl">{item.name}</p>
               <p class="text-sm">{item.description}</p>
               <p class="text-primary text-lg font-bold">

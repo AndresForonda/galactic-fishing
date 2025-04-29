@@ -7,13 +7,13 @@ import {
   MarketResponse,
 } from './api'
 
-import { TopLeaderBoard } from './components/TopLeaderBoard'
 import { Loading } from './components/Loading'
 
 import { Tabs } from './components/Tabs'
 import { lazy, Suspense } from 'preact/compat'
 const Market = lazy(() => import('./components/Market'))
 const Leaderboard = lazy(() => import('./components/Leaderboard'))
+const TopLeaderBoard = lazy(() => import('./components/TopLeaderBoard'))
 
 export function App() {
   const tabs = [
@@ -56,14 +56,10 @@ export function App() {
     }
   }
 
-  const [isLoading, setIsLoading] = useState(false)
-
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
       await fetchLeaderboardData()
       await fetchMarketData()
-      setIsLoading(false)
     }
     fetchData()
   }, [])
@@ -91,27 +87,28 @@ export function App() {
           selectedTab={selectedTab}
           onSelectedTab={setSelectedTab}
         />
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            {selectedTab === 'leaderboard' && (
-              <TopLeaderBoard players={topPlayers} />
-            )}
-            <div class="flex-grow overflow-hidden w-full ">
-              {selectedTab === 'leaderboard' && (
-                <Suspense fallback={<Loading />}>
-                  {otherPlayers && <Leaderboard players={otherPlayers || []} />}
-                </Suspense>
-              )}
-              {selectedTab === 'market' && (
-                <Suspense fallback={<Loading />}>
-                  {marketData && <Market items={marketData.items} />}
-                </Suspense>
-              )}
-            </div>
-          </>
-        )}
+        <Suspense fallback={<Loading />}>
+          {selectedTab === 'leaderboard' ? (
+            leaderboardData ? (
+              <>
+                <TopLeaderBoard players={topPlayers} />
+                <div class="flex-grow overflow-hidden w-full">
+                  <Leaderboard players={otherPlayers} />
+                </div>
+              </>
+            ) : (
+              <Loading />
+            )
+          ) : selectedTab === 'market' ? (
+            marketData ? (
+              <div class="flex-grow overflow-hidden w-full">
+                <Market items={marketData.items} />
+              </div>
+            ) : (
+              <Loading />
+            )
+          ) : null}
+        </Suspense>
       </div>
     </>
   )

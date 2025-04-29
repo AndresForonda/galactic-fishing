@@ -1,5 +1,5 @@
 import { FunctionalComponent } from 'preact'
-import { useState } from 'preact/hooks'
+import { useState, useEffect } from 'preact/hooks'
 import { LeaderboardPlayer, LeaderboardResponse } from '../api'
 import { useIsMobile } from '../hooks.ts'
 
@@ -27,15 +27,19 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
   }
 
   // initial players calling handlePageChange with page 1 and rowsPerPage
-  if (playersOnPage.length === 0) {
+  useEffect(() => {
     const startIndex = (currentPage - 1) * rowsPerPage
     const endIndex = startIndex + rowsPerPage
     setPlayersOnPage(players.slice(startIndex, endIndex))
-  }
+    setTotalPages(Math.ceil(players.length / rowsPerPage))
+  }, [players, currentPage, rowsPerPage])
 
   return (
-    <div class="overflow-y-auto flex-grow" style={{ maxHeight: '100%' }}>
-      <table class="w-full border-2 border-t-0 border-border">
+    <div
+      class="overflow-y-auto flex flex-col flex-grow"
+      style={{ height: '100%' }}
+    >
+      <table class="w-full border-2 border-t-0 border-border h-full">
         <thead class="bg-black sticky top-0 z-10">
           <tr class="text-md">
             <th class="border-t-2 border-border py-2 w-16">Rank</th>
@@ -50,14 +54,14 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
             return (
               <tr
                 key={player.username}
-                class={`h-8 odd:bg-gray-900 even:bg-black ${
-                  isMobile ? 'cursor-pointer' : ''
+                class={` odd:bg-gray-900 even:bg-black  ${
+                  isMobile ? 'cursor-crosshair hover:bg-gray-700' : ''
                 }`}
                 onClick={() => isMobile && toggleRow(player.username)}
               >
-                <td class="custom-dashed text-right pr-2">{player.rank}</td>
+                <td class="h-8 custom-dashed text-right pr-2">{player.rank}</td>
                 <td
-                  class={`custom-dashed overflow-hidden truncate whitespace-nowrap ${
+                  class={`h-8 custom-dashed overflow-hidden truncate whitespace-nowrap ${
                     expandedRow === player.username ? 'font-bold py-2' : ''
                   }`}
                   title={player.username}
@@ -70,7 +74,9 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
                     </div>
                   )}
                 </td>
-                <td class="custom-dashed text-right px-2">{player.level}</td>
+                <td class="h-8 custom-dashed text-right px-2">
+                  {player.level}
+                </td>
                 <td class="custom-dashed text-right hidden">
                   {player.xp.toLocaleString()}
                 </td>
@@ -86,19 +92,19 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
         <button
           onClick={() => handlePageChange(currentPage - 1, rowsPerPage)}
           disabled={currentPage <= 1}
-          class="text-4xl px-2 h-full bg-border cursor-pointer"
+          class="text-4xl px-2 h-full bg-border cursor-crosshair"
         >
           &lt;
         </button>
         <div class="flex justify-center items-center gap-1 text-sm h-full">
           <p class="h-full flex items-center">
-            Page {currentPage} of {totalPages}
+            {`Page ${currentPage} of ${totalPages}`}
           </p>
           <span class="h-full flex items-center">|</span>
           <div class="flex items-center h-full gap-2">
             <label htmlFor="page-select">Rows per page</label>
             <select
-              class="bg-border h-full"
+              class="bg-border h-full cursor-crosshair"
               id="page-select"
               value={rowsPerPage}
               onChange={(e) => {
@@ -114,7 +120,7 @@ const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
           </div>
         </div>
         <button
-          class="text-4xl px-2 h-full bg-border cursor-pointer"
+          class="text-4xl px-2 h-full bg-border cursor-crosshair"
           onClick={() => handlePageChange(currentPage + 1, rowsPerPage)}
           disabled={currentPage >= totalPages}
         >

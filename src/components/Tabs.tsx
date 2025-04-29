@@ -24,8 +24,8 @@ export const Tabs: FunctionalComponent<TabsProps> = ({
           onClick={() => onSelectedTab(tab.key)}
           class={`text-2xl w-36 h-12  ${
             selectedTab === tab.key
-              ? 'bg-primary text-black cursor-crosshair'
-              : 'bg-border text-white opacity-50 hover:opacity-100 cursor-pointer'
+              ? 'bg-primary text-black'
+              : 'bg-border text-white opacity-50 hover:opacity-100 cursor-crosshair'
           } `}
         >
           {tab.label}

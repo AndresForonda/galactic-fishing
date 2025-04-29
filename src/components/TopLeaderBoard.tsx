@@ -1,7 +1,7 @@
 import { FunctionalComponent } from 'preact'
 import { LeaderboardPlayer, LeaderboardResponse } from '../api'
 
-export const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
+const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
   players,
 }) => {
   const RANK_ICONS = {
@@ -33,3 +33,5 @@ export const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
     </div>
   )
 }
+
+export default TopLeaderBoard
