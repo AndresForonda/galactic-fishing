@@ -6,7 +6,7 @@ import { useIsMobile } from '../hooks.ts'
 const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
   const isMobile = useIsMobile()
   const [playersOnPage, setPlayersOnPage] = useState<LeaderboardPlayer[]>([])
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [rowsPerPage, setRowsPerPage] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(
     Math.ceil(players.length / rowsPerPage)
