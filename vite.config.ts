@@ -36,12 +36,6 @@ export default defineConfig({
         orientation: 'portrait-primary',
         icons: [
           {
-            src: '/icons/android-chrome-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-          {
             src: '/icons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
@@ -51,7 +45,7 @@ export default defineConfig({
       },
     }) as PluginOption,
     visualizer({
-      open: true,
+      open: false,
       gzipSize: true,
       brotliSize: true,
     }) as PluginOption,
