@@ -1,5 +1,3 @@
-import { FunctionalComponent } from 'preact'
-
 interface Tab {
   label: string
   key: string
@@ -11,11 +9,7 @@ interface TabsProps {
   onSelectedTab: (key: string) => void
 }
 
-export const Tabs: FunctionalComponent<TabsProps> = ({
-  tabs,
-  selectedTab,
-  onSelectedTab,
-}) => {
+export const Tabs = ({ tabs, selectedTab, onSelectedTab }: TabsProps) => {
   return (
     <div class="flex w-full justify-center items-center max-w-108 2xl:max-w-160">
       {tabs.map((tab) => (

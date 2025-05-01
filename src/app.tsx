@@ -70,11 +70,11 @@ export function App() {
       if (!leaderboardData) return <LoadingCube />
       return (
         <div class="flex flex-col items-center justify-start h-full  overflow-hidden w-full gap-2 sm:gap-4 lg:flex-row lg:items-start lg:gap-1  xl:pb-2 xl:mt-4 xl:gap-4 lg:w-auto ">
-          <div class="w-full h-full lg:w-auto ">
+          <div class="w-full lg:w-auto lg:h-full">
             <p class="font-terminal text-center text-3xl xl:hidden">
               Total players: {leaderboardData?.players.length}{' '}
             </p>
-            <div class="h-full  overflow-scroll">
+            <div class="lg:h-full lg:overflow-scroll">
               <TopLeaderBoard players={topPlayers} />
             </div>
           </div>

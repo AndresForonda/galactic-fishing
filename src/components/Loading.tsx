@@ -1,16 +1,8 @@
-import { FunctionalComponent } from 'preact'
 import { useState, useEffect } from 'preact/hooks'
 
-interface LoadingProps {
-  text?: string
-}
-
-export const Loading: FunctionalComponent<LoadingProps> = ({
-  text = 'Loading...',
-}) => {
+export const Loading = ({ text = 'Loading...' }) => {
   const [loadingText, setLoadingText] = useState<string>('')
 
-  // funtion to write Loading... char by char
   const writeLoading = (text: string, index: number) => {
     if (index < text.length) {
       setLoadingText((prev) => prev + text[index])

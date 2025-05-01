@@ -1,10 +1,7 @@
-import { FunctionalComponent } from 'preact'
-import { LeaderboardPlayer, LeaderboardResponse } from '../api'
+import { LeaderboardPlayer } from '../api'
 import { getFishAmountByEmoji } from '../utils'
 
-const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
-  players,
-}) => {
+const TopLeaderBoard = ({ players }: { players: LeaderboardPlayer[] }) => {
   const RANK_ICONS = {
     1: '🥇',
     2: '🥈',
@@ -14,7 +11,7 @@ const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
   return (
     <div class="flex flex-col items-center justify-between w-full gap-1 sm:gap-4 lg:mt-2 xl:mt-0">
       {players &&
-        players.map((player: LeaderboardPlayer, index: number) => (
+        players.map((player, index) => (
           <div
             key={player.username}
             class={`${
