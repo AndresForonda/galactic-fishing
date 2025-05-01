@@ -1,4 +1,3 @@
-import { FunctionalComponent } from 'preact'
 import { useState, useEffect } from 'preact/hooks'
 
 interface Fish {
@@ -69,12 +68,12 @@ const FISH_LIST: Fish[] = [
 const COLOR_MAP = {
   common: 'text-white',
   uncommon: 'text-green-500',
-  rare: 'text-blue-400',
-  epic: 'text-purple-400',
-  legendary: 'text-yellow-400',
+  rare: 'text-blue-500',
+  epic: 'text-purple-500',
+  legendary: 'text-yellow-300',
 }
 
-const AnimatedFishWriter: FunctionalComponent = () => {
+const AnimatedFishWriter = () => {
   const [fish, setFish] = useState<Fish | null>(null)
   const [typedType, setTypedType] = useState('')
   const [typedName, setTypedName] = useState('')
@@ -129,20 +128,18 @@ const AnimatedFishWriter: FunctionalComponent = () => {
   }, [])
 
   return (
-    <div class="flex flex-col pl-2 font-terminal text-xl text-shadow-lg sm:text-2xl sm:flex-row md:text-3xl 2xl:text-4xl  bg-red-500">
-      <div class="flex mr-2">
-        <p>
-          Play and catch {getIndefiniteArticle(typedType) + ' '}
-          <span class={fish ? COLOR_MAP[fish.type] : ''}>
-            {typedType}
-            {fish?.name && typedType.length < fish.type.length && (
-              <span class={cursorVisible ? 'animate-blink' : 'invisible'}>
-                _
-              </span>
-            )}
-          </span>
-        </p>
-      </div>
+    <div class="flex flex-col pl-2 font-terminal text-2xl text-shadow-lg sm:text-2xl sm:flex-row md:text-3xl 2xl:text-4xl  ">
+      <p class="mr-2">
+        Play and catch {getIndefiniteArticle(typedType) + ' '}
+        <span
+          class={`${fish ? COLOR_MAP[fish.type] : ''} bg-terminal min-h-full`}
+        >
+          {typedType}
+          {fish?.name && typedType.length < fish.type.length && (
+            <span class={cursorVisible ? 'animate-blink' : 'invisible'}>_</span>
+          )}
+        </span>
+      </p>
       <p>
         {`${emoji} ${typedName}`}
         <span

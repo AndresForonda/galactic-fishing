@@ -9,14 +9,12 @@ import {
 
 import { LoadingCube } from './components/LoadingCube'
 import { Loading } from './components/Loading'
-
 import { Tabs } from './components/Tabs'
-import { lazy, Suspense } from 'preact/compat'
 import AnimatedFishWriter from './components/AnimatedFishWriter'
 import Logo from './components/Logo'
-const Market = lazy(() => import('./components/Market'))
-const Leaderboard = lazy(() => import('./components/Leaderboard'))
-const TopLeaderBoard = lazy(() => import('./components/TopLeaderBoard'))
+import Market from './components/Market'
+import Leaderboard from './components/Leaderboard'
+import TopLeaderBoard from './components/TopLeaderBoard'
 
 export function App() {
   const tabs = [
@@ -72,11 +70,13 @@ export function App() {
       if (!leaderboardData) return <LoadingCube />
       return (
         <div class="flex flex-col items-center justify-start h-full  overflow-hidden w-full gap-2 sm:gap-4 lg:flex-row lg:items-start lg:gap-1  xl:pb-2 xl:mt-4 xl:gap-4 lg:w-auto ">
-          <div class="w-full lg:w-auto">
+          <div class="w-full h-full lg:w-auto ">
             <p class="font-terminal text-center text-3xl xl:hidden">
               Total players: {leaderboardData?.players.length}{' '}
             </p>
-            <TopLeaderBoard players={topPlayers} />
+            <div class="h-full  overflow-scroll">
+              <TopLeaderBoard players={topPlayers} />
+            </div>
           </div>
           <div class="flex-grow overflow-hidden w-full lg:h-full">
             <Leaderboard players={otherPlayers} />
@@ -88,7 +88,7 @@ export function App() {
     if (selectedTab === 'market') {
       if (!marketData) return <LoadingCube />
       return (
-        <div class="flex-grow overflow-hidden w-full">
+        <div class="flex-grow overflow-scroll w-full">
           <Market items={marketData.items} />
         </div>
       )
@@ -98,12 +98,12 @@ export function App() {
   }
 
   return (
-    <div class="flex flex-col items-center justify-start h-dvh max-h-dvh gap-4 bg-blue-950 text-white p-4 overflow-hidden sm:py-4 xl:py-8 ">
-      <div>
+    <div class="flex flex-col gap-1 items-center justify-start h-dvh max-h-dvh bg-blue-950 text-white p-4 overflow-hidden xs:gap-2 sm:py-4 xl:py-8 ">
+      <div class="flex w-full xs:w-auto flex-col gap-2">
         <Logo />
         <AnimatedFishWriter />
       </div>
-      <div class="sm:landscape:block lg:landscape:hidden hidden fixed pt-20 inset-0 z-40 bg-terminal text-white text-center p-6 items-center justify-center">
+      <div class="hidden fixed pt-20 inset-0 z-50 bg-terminal text-white text-center p-6 items-center justify-center sm:landscape:block lg:landscape:hidden ">
         <div class="flex flex-col items-center gap-4">
           <p class="text-lg font-bold">
             This app only works in portrait mode. Please rotate your device.
@@ -117,7 +117,7 @@ export function App() {
         selectedTab={selectedTab}
         onSelectedTab={setSelectedTab}
       />
-      <Suspense fallback={<LoadingCube />}>{renderContent()}</Suspense>
+      {renderContent()}
     </div>
   )
 }

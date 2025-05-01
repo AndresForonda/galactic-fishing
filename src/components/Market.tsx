@@ -16,12 +16,12 @@ const Market: FunctionComponent<MarketProps> = ({ items }) => {
   }
 
   return (
-    <div class="flex flex-col items-center w-full gap-4 h-full overflow-y-auto lg:grid lg:grid-cols-2 lg:max-w-6xl lg:mx-auto lg:items-baseline lg:auto-rows-min lg:py-4 lg:mt-4">
+    <div class="w-full flex flex-col gap-4 items-center overflow-y-scroll h-auto mt-4 sm:w-108 sm:mx-auto lg:flex-row lg:flex-start lg:flex-wrap lg:w-5xl lg:justify-center lg:items-start">
       {items &&
         items.map((item: MarketItem) => (
           <div
             key={item.id}
-            class="flex  border-border bg-terminal border-2 px-2 py-4 gap-4 w-full max-w-120 min-h-48"
+            class="flex  border-border bg-terminal border-2 px-2 py-4 gap-4 w-full max-w-120 lg:h-52"
           >
             <div class="text-8xl flex justify-center items-center gap-1 w-2/5 text-center">
               {MARKET_ICONS[item.type as keyof typeof MARKET_ICONS] || (

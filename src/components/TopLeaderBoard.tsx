@@ -29,10 +29,10 @@ const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
               <p
                 class={`${
                   player.rank === 1
-                    ? ' lg:flex-col xl:text-3xl 2xl:text-5xl'
-                    : ' '
+                    ? 'lg:flex-col text-2xl 2xl:text-5xl'
+                    : 'text-xl 2xl:text-3xl'
                 }
-                flex text-xl items-center xs:py-1 gap-2`}
+                flex  items-center xs:py-1 gap-2`}
               >
                 <span
                   class={`${
@@ -45,7 +45,9 @@ const TopLeaderBoard: FunctionalComponent<LeaderboardResponse> = ({
                 </span>
                 <span
                   title={player.username}
-                  class="max-w-3xs sm:max-w-92  truncate overflow-hidden whitespace-nowrap block"
+                  class={`
+                    ${player.rank === 1 ? '2xl:max-w-xl' : '2xl:max-w-lg'}
+                     max-w-2xs sm:max-w-sm truncate overflow-hidden whitespace-nowrap block`}
                 >
                   {player.username}
                 </span>

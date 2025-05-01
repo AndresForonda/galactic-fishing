@@ -1,10 +1,9 @@
-import { FunctionalComponent } from 'preact'
 import { useState, useEffect } from 'preact/hooks'
-import { LeaderboardPlayer, LeaderboardResponse } from '../api'
+import { LeaderboardPlayer } from '../api'
 import { useIsMobile } from '../hooks.ts'
 import { getFishAmountByEmoji } from '../utils.ts'
 
-const Leaderboard: FunctionalComponent<LeaderboardResponse> = ({ players }) => {
+const Leaderboard = ({ players }: { players: LeaderboardPlayer[] }) => {
   const isMobile = useIsMobile()
   const [playersOnPage, setPlayersOnPage] = useState<LeaderboardPlayer[]>([])
   const [rowsPerPage, setRowsPerPage] = useState(30)

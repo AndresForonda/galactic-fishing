@@ -25,7 +25,7 @@ export const Tabs: FunctionalComponent<TabsProps> = ({
           class={`text-3xl w-1/2 h-12 2xl:h-18 2xl:text-5xl ${
             selectedTab === tab.key
               ? 'bg-primary text-terminal'
-              : 'bg-terminal text-white opacity-50 hover:opacity-100 cursor-crosshair'
+              : 'bg-terminal text-primary opacity-50 hover:opacity-100 cursor-crosshair'
           } `}
         >
           {tab.label}
