@@ -14,6 +14,8 @@ export interface LeaderboardPlayer {
   level: number
   xp: number
   gold: number
+  isInfected: boolean
+  fishEmojis: string
 }
 
 export interface LeaderboardResponse {

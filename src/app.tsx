@@ -7,10 +7,13 @@ import {
   MarketResponse,
 } from './api'
 
+import { LoadingCube } from './components/LoadingCube'
 import { Loading } from './components/Loading'
 
 import { Tabs } from './components/Tabs'
 import { lazy, Suspense } from 'preact/compat'
+import AnimatedFishWriter from './components/AnimatedFishWriter'
+import Logo from './components/Logo'
 const Market = lazy(() => import('./components/Market'))
 const Leaderboard = lazy(() => import('./components/Leaderboard'))
 const TopLeaderBoard = lazy(() => import('./components/TopLeaderBoard'))
@@ -66,19 +69,24 @@ export function App() {
 
   const renderContent = () => {
     if (selectedTab === 'leaderboard') {
-      if (!leaderboardData) return <Loading />
+      if (!leaderboardData) return <LoadingCube />
       return (
-        <>
-          <TopLeaderBoard players={topPlayers} />
-          <div class="flex-grow overflow-hidden w-full">
+        <div class="flex flex-col items-center justify-start h-full  overflow-hidden w-full gap-2 sm:gap-4 lg:flex-row lg:items-start lg:gap-1  xl:pb-2 xl:mt-4 xl:gap-4 lg:w-auto ">
+          <div class="w-full lg:w-auto">
+            <p class="font-terminal text-center text-3xl xl:hidden">
+              Total players: {leaderboardData?.players.length}{' '}
+            </p>
+            <TopLeaderBoard players={topPlayers} />
+          </div>
+          <div class="flex-grow overflow-hidden w-full lg:h-full">
             <Leaderboard players={otherPlayers} />
           </div>
-        </>
+        </div>
       )
     }
 
     if (selectedTab === 'market') {
-      if (!marketData) return <Loading />
+      if (!marketData) return <LoadingCube />
       return (
         <div class="flex-grow overflow-hidden w-full">
           <Market items={marketData.items} />
@@ -90,23 +98,26 @@ export function App() {
   }
 
   return (
-    <>
-      <div class="flex flex-col items-center justify-start h-lvh gap-4 bg-black text-white p-2 overflow-hidden">
-        <div class="h-14 p-2 sticky flex items-center justify-center bg-black top-0">
-          <img
-            src="/logo-400.avif"
-            class="w-[400px] h-[50px] object-contain block"
-            alt="Logo"
-            fetchpriority="high"
-          />
-        </div>
-        <Tabs
-          tabs={tabs}
-          selectedTab={selectedTab}
-          onSelectedTab={setSelectedTab}
-        />
-        <Suspense fallback={<Loading />}>{renderContent()}</Suspense>
+    <div class="flex flex-col items-center justify-start h-dvh max-h-dvh gap-4 bg-blue-950 text-white p-4 overflow-hidden sm:py-4 xl:py-8 ">
+      <div>
+        <Logo />
+        <AnimatedFishWriter />
       </div>
-    </>
+      <div class="sm:landscape:block lg:landscape:hidden hidden fixed pt-20 inset-0 z-40 bg-terminal text-white text-center p-6 items-center justify-center">
+        <div class="flex flex-col items-center gap-4">
+          <p class="text-lg font-bold">
+            This app only works in portrait mode. Please rotate your device.
+          </p>
+          <Loading text="WAITING" />
+        </div>
+      </div>
+
+      <Tabs
+        tabs={tabs}
+        selectedTab={selectedTab}
+        onSelectedTab={setSelectedTab}
+      />
+      <Suspense fallback={<LoadingCube />}>{renderContent()}</Suspense>
+    </div>
   )
 }

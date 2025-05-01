@@ -1,7 +1,13 @@
 import { FunctionalComponent } from 'preact'
 import { useState, useEffect } from 'preact/hooks'
 
-export const Loading: FunctionalComponent = () => {
+interface LoadingProps {
+  text?: string
+}
+
+export const Loading: FunctionalComponent<LoadingProps> = ({
+  text = 'Loading...',
+}) => {
   const [loadingText, setLoadingText] = useState<string>('')
 
   // funtion to write Loading... char by char
@@ -11,17 +17,17 @@ export const Loading: FunctionalComponent = () => {
       setTimeout(() => writeLoading(text, index + 1), 200)
     } else {
       setLoadingText('')
-      writeLoading('Loading...', 0)
+      writeLoading(text, 0)
     }
   }
 
   useEffect(() => {
-    writeLoading('Loading...', 0)
-  }, [])
+    writeLoading(text, 0)
+  }, [text])
 
   return (
     <div class="flex flex-col items-left flex-grow overflow-hidden w-full">
-      <p>
+      <p class="flex justify-center items-center text-5xl text-primary font-terminal">
         {loadingText}
         {loadingText.length % 2 ? '_' : ''}
       </p>

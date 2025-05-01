@@ -7,31 +7,31 @@ interface MarketProps {
 
 const Market: FunctionComponent<MarketProps> = ({ items }) => {
   const MARKET_ICONS = {
-    poison_delay: ['☠️', '⏳'],
-    poison_leveling: ['☠️', '🆙'],
-    poison_recovery: ['☠️', '💊'],
-    fishing_rod: ['🎣'],
+    poison_delay: '⏳',
+    poison_leveling: '🆙',
+    poison_recovery: '💊',
+    fishing_rod: '🎣',
+    poison_reveal_fishes: '🔍',
+    default: '❓',
   }
 
   return (
-    <div class="flex flex-col w-full gap-4 h-full overflow-y-auto">
+    <div class="flex flex-col items-center w-full gap-4 h-full overflow-y-auto lg:grid lg:grid-cols-2 lg:max-w-6xl lg:mx-auto lg:items-baseline lg:auto-rows-min lg:py-4 lg:mt-4">
       {items &&
         items.map((item: MarketItem) => (
           <div
             key={item.id}
-            class="flex  border-border border-2 px-2 py-4 gap-4 "
+            class="flex  border-border bg-terminal border-2 px-2 py-4 gap-4 w-full max-w-120 min-h-48"
           >
-            <div class="text-6xl flex justify-center items-center gap-1 w-2/5 text-center">
-              {MARKET_ICONS[item.type as keyof typeof MARKET_ICONS].map(
-                (icon) => (
-                  <span key={icon}>{icon}</span>
-                )
+            <div class="text-8xl flex justify-center items-center gap-1 w-2/5 text-center">
+              {MARKET_ICONS[item.type as keyof typeof MARKET_ICONS] || (
+                <span>❓</span>
               )}
             </div>
-            <div class="flex flex-col w-3/5">
+            <div class="flex flex-col w-3/5 justify-between">
               <p class="text-primary font-bold text-xl">{item.name}</p>
-              <p class="text-sm">{item.description}</p>
-              <p class="text-primary text-lg font-bold">
+              <p class="text-md">{item.description}</p>
+              <p class="text-primary text-xl font-bold">
                 💰 {item.cost.toLocaleString()}
               </p>
             </div>

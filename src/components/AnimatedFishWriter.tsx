@@ -69,9 +69,9 @@ const FISH_LIST: Fish[] = [
 const COLOR_MAP = {
   common: 'text-white',
   uncommon: 'text-green-500',
-  rare: 'text-blue-500',
-  epic: 'text-purple-500',
-  legendary: 'text-yellow-500',
+  rare: 'text-blue-400',
+  epic: 'text-purple-400',
+  legendary: 'text-yellow-400',
 }
 
 const AnimatedFishWriter: FunctionalComponent = () => {
@@ -113,6 +113,10 @@ const AnimatedFishWriter: FunctionalComponent = () => {
     animate()
   }
 
+  const getIndefiniteArticle = (word: string) => {
+    return /^[aeiou]/i.test(word) ? 'an' : 'a'
+  }
+
   useEffect(() => {
     animate()
   }, [])
@@ -125,10 +129,10 @@ const AnimatedFishWriter: FunctionalComponent = () => {
   }, [])
 
   return (
-    <div class="flex flex-col items-center justify-center min-h-14 font-terminal text-xl sm:text-2xl sm:min-h-16">
-      <div class="flex">
+    <div class="flex flex-col pl-2 font-terminal text-xl text-shadow-lg sm:text-2xl sm:flex-row md:text-3xl 2xl:text-4xl  bg-red-500">
+      <div class="flex mr-2">
         <p>
-          Play and catch a{' '}
+          Play and catch {getIndefiniteArticle(typedType) + ' '}
           <span class={fish ? COLOR_MAP[fish.type] : ''}>
             {typedType}
             {fish?.name && typedType.length < fish.type.length && (
@@ -140,7 +144,7 @@ const AnimatedFishWriter: FunctionalComponent = () => {
         </p>
       </div>
       <p>
-        {emoji} {typedName}
+        {`${emoji} ${typedName}`}
         <span
           class={typedName && cursorVisible ? 'animate-blink' : 'invisible'}
         >

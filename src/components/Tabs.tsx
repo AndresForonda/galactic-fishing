@@ -17,15 +17,15 @@ export const Tabs: FunctionalComponent<TabsProps> = ({
   onSelectedTab,
 }) => {
   return (
-    <div class="flex justify-center items-center">
+    <div class="flex w-full justify-center items-center max-w-108 2xl:max-w-160">
       {tabs.map((tab) => (
         <button
           key={tab.key}
           onClick={() => onSelectedTab(tab.key)}
-          class={`text-2xl w-36 h-12  ${
+          class={`text-3xl w-1/2 h-12 2xl:h-18 2xl:text-5xl ${
             selectedTab === tab.key
-              ? 'bg-primary text-black'
-              : 'bg-border text-white opacity-50 hover:opacity-100 cursor-crosshair'
+              ? 'bg-primary text-terminal'
+              : 'bg-terminal text-white opacity-50 hover:opacity-100 cursor-crosshair'
           } `}
         >
           {tab.label}
