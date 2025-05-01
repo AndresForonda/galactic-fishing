@@ -8,6 +8,15 @@
   --color-danger: #ff5555;
   --color-info: #7df9ff;
   --color-border: #2f4f4f;
+  --color-terminal: #0f0f0f;
+  --color-terminal-700: #1a1a1a;
+  --color-poison: #ff00ff;
+  --font-terminal: 'VT323', monospace;
+  --font-body: 'IBM Plex Mono', monospace;
+  --breakpoint-xxs: 23.5rem;
+  --breakpoint-xs: 26.2rem;
+  --breakpoint-2k: 160rem;
+  --breakpoint-4k: 240rem;
 }
 
 @layer base {
