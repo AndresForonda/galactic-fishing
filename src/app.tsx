@@ -98,7 +98,7 @@ export function App() {
   }
 
   return (
-    <div class="flex flex-col gap-1 items-center justify-start h-dvh max-h-dvh bg-blue-950 text-white p-4 overflow-hidden xs:gap-2 sm:py-4 xl:py-8 ">
+    <div class="flex flex-col gap-1 items-center justify-start h-dvh max-h-dvh bg-blue-950 text-white p-4 overflow-hidden xs:gap-2 sm:py-4 ">
       <div class="flex w-full xs:w-auto flex-col gap-2">
         <Logo />
         <AnimatedFishWriter />

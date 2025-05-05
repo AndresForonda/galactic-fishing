@@ -1,5 +1,11 @@
 import { LeaderboardPlayer } from '../api'
-import { getFishAmountByEmoji } from '../utils'
+
+const Stat = ({ icon, value }: { icon: string; value: string | number }) => (
+  <div class="flex items-center lg:flex-col 2xl:flex-row 2xl:gap-2">
+    <p class="xl:text-3xl">{icon}</p>
+    <p>{value}</p>
+  </div>
+)
 
 const TopLeaderBoard = ({ players }: { players: LeaderboardPlayer[] }) => {
   const RANK_ICONS = {
@@ -9,76 +15,63 @@ const TopLeaderBoard = ({ players }: { players: LeaderboardPlayer[] }) => {
   }
 
   return (
-    <div class="flex flex-col items-center justify-between w-full gap-1 sm:gap-4 lg:mt-2 xl:mt-0">
-      {players &&
-        players.map((player, index) => (
+    <div class="flex flex-col items-center justify-between w-full gap-2 sm:gap-4">
+      {players.map((player, index) => {
+        const borderColor =
+          index === 0
+            ? 'border-yellow-500 border-4'
+            : index === 1
+            ? 'border-slate-300 border-2'
+            : 'border-orange-500 border-2'
+
+        const bgColor =
+          index === 0
+            ? 'bg-yellow-500 border-yellow-500 text-terminal'
+            : index === 1
+            ? 'bg-slate-300 border-slate-300 text-terminal'
+            : 'bg-orange-500 border-orange-500 text-shadow-lg'
+
+        const isFirst = player.rank === 1
+
+        return (
           <div
             key={player.username}
-            class={`${
-              index === 0
-                ? 'border-yellow-500 border-4'
-                : index === 1
-                ? 'border-slate-300 border-2'
-                : 'border-orange-500 border-2'
-            } group w-full bg-terminal max-w-108 cursor-text border-border  lg:min-w-84  xl:min-w-md 2xl:min-w-160`}
+            class={`group w-full bg-terminal max-w-108 cursor-text border-border lg:min-w-84 xl:min-w-md 2xl:min-w-160 ${borderColor}`}
           >
-            <div class="flex flex-col items-center justify-between w-full gap-1  2k:gap-5">
+            <div class="flex flex-col items-center justify-between w-full gap-1 2k:gap-5">
               <p
-                class={`${
-                  player.rank === 1
+                class={`flex items-center xs:py-1 gap-2 ${
+                  isFirst
                     ? 'lg:flex-col text-2xl 2xl:text-5xl'
                     : 'text-xl 2xl:text-3xl'
-                }
-                flex  items-center xs:py-1 gap-2`}
+                }`}
               >
                 <span
-                  class={`${
-                    player.rank === 1
-                      ? 'lg:text-4xl  xl:text-8xl'
-                      : 'xl:text-6xl'
-                  }`}
+                  class={isFirst ? 'lg:text-3xl xl:text-8xl' : 'xl:text-6xl'}
                 >
                   {RANK_ICONS[player.rank as keyof typeof RANK_ICONS]}
                 </span>
                 <span
                   title={player.username}
-                  class={`
-                    ${player.rank === 1 ? '2xl:max-w-xl' : '2xl:max-w-lg'}
-                     max-w-2xs sm:max-w-sm truncate overflow-hidden whitespace-nowrap block`}
+                  class={`block max-w-2xs sm:max-w-sm ${
+                    isFirst ? '2xl:max-w-xl' : '2xl:max-w-lg'
+                  } truncate overflow-hidden whitespace-nowrap`}
                 >
                   {player.username}
                 </span>
               </p>
+
               <div
-                class={`
-                ${
-                  index === 0
-                    ? 'bg-yellow-500 border-yellow-500 text-terminal'
-                    : index === 1
-                    ? 'bg-slate-300 border-slate-300 text-terminal'
-                    : 'bg-orange-500 border-orange-500 text-shadow-lg'
-                }
-                flex border-t-2 justify-between px-4 items-center font-bold font-terminal w-full text-lg sm:text-lg sm:font-mono lg:text-base lg:font-normal xl:text-xl xl:font-bold 2k:py-4`}
+                class={`flex border-t-2 justify-between px-4 items-center font-bold font-terminal w-full text-lg sm:text-lg sm:font-mono lg:text-base lg:font-normal xl:text-xl xl:font-bold 2k:py-4 ${bgColor}`}
               >
-                <div class="flex items-center lg:flex-col 2xl:flex-row 2xl:gap-2">
-                  <p class="xl:text-3xl">🏆</p> <p>{player.level}</p>
-                </div>
-                <div class="flex items-center lg:flex-col 2xl:flex-row 2xl:gap-2">
-                  <p class="xl:text-3xl">🧠</p>{' '}
-                  <p>{player.xp.toLocaleString()}</p>
-                </div>
-                <div class="flex items-center lg:flex-col 2xl:flex-row 2xl:gap-2">
-                  <p class="xl:text-3xl">💰</p>{' '}
-                  <p>{player.gold.toLocaleString()}</p>
-                </div>
-                <div class="flex items-center lg:flex-col 2xl:flex-row 2xl:gap-2">
-                  <p class="xl:text-3xl">🐟</p>{' '}
-                  <p>{getFishAmountByEmoji(player.fishEmojis)}</p>
-                </div>
+                <Stat icon="🏆" value={player.level} />
+                <Stat icon="🧠" value={player.xp.toLocaleString('en-US')} />
+                <Stat icon="💰" value={player.gold.toLocaleString('en-US')} />
               </div>
             </div>
           </div>
-        ))}
+        )
+      })}
     </div>
   )
 }

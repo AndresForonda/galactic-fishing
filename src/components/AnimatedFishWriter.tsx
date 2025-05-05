@@ -128,25 +128,19 @@ const AnimatedFishWriter = () => {
   }, [])
 
   return (
-    <div class="flex flex-col pl-2 font-terminal text-2xl text-shadow-lg sm:text-2xl sm:flex-row md:text-3xl 2xl:text-4xl  ">
+    <div class="flex flex-col font-terminal text-2xl text-shadow-lg sm:text-2xl sm:flex-row md:text-3xl xl:text-5xl">
       <p class="mr-2">
         Play and catch {getIndefiniteArticle(typedType) + ' '}
-        <span
-          class={`${fish ? COLOR_MAP[fish.type] : ''} bg-terminal min-h-full`}
-        >
+        <span class={`${fish ? COLOR_MAP[fish.type] : ''} bg-terminal`}>
           {typedType}
           {fish?.name && typedType.length < fish.type.length && (
-            <span class={cursorVisible ? 'animate-blink' : 'invisible'}>_</span>
+            <span class={cursorVisible ? '' : 'invisible'}>_</span>
           )}
         </span>
       </p>
       <p>
         {`${emoji} ${typedName}`}
-        <span
-          class={typedName && cursorVisible ? 'animate-blink' : 'invisible'}
-        >
-          _
-        </span>
+        <span class={typedName && cursorVisible ? '' : 'invisible'}>_</span>
       </p>
     </div>
   )
